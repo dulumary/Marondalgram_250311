@@ -1,0 +1,10 @@
+spring:
+    config:
+        import: security-variable.yml
+    application:
+        name: Marondalgram
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:33006/marondalgram_250311
+        username: root
+        password: ${mysql.password}
