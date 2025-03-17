@@ -32,6 +32,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+	
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
 }
 
 tasks.named('test') {

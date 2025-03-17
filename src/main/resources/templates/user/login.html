@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/noheader}">
+    
+    <section layout:fragment="contents" class="contents d-flex justify-content-center my-5">
+        <div class="mr-5">
+            <img src="https://cdn.pixabay.com/photo/2016/08/09/17/52/instagram-1581266_1280.jpg" width="450">
+        </div>
+        <div>
+            <div class="login-box d-flex justify-content-center align-items-start bg-white  border rounded">        
+                <div class="w-100 p-5">         
+                    <h2 class="text-center">Marondalgram</h2>
+                    <br>
+                    <form id="loginForm">
+	                    <input type="text" class="form-control mt-3" placeholder="아이디" id="idInput">
+	                    <input type="password" class="form-control mt-3" placeholder="패스워드" id="passwordInput">
+	                    <button type="submit" class="btn btn-primary btn-block mt-3" id="loginBtn">로그인</button>
+					</form>
+                    <hr/>
+                    
+                    <div class="text-center text-secondary">비밀번호를 잊으셨나요?</div>
+                </div>
+                
+            </div>
+            <div class="mt-4 p-3 d-flex justify-content-center align-items-start bg-white  border rounded">
+                계정이 없으신가요? <a href="/user/join-view">가입하기</a>
+            </div>
+        </div>
+    </section>
+    
+    <script layout:fragment="script">
+    	$(function() {
+    		
+    		$("#loginForm").on("submit", function(e) {
+
+    			e.preventDefault();
+    			
+    			let id = $("#idInput").val();
+    			let password = $("#passwordInput").val();
+    			
+    			if(id == "") {
+    				alert("아이디를 입력하세요");
+    				return ;
+    			}
+    			
+    			if(password == "") {
+    				alert("비밀번호를 입력하세요");
+    				return ;
+    			}
+    			
+    			console.log("아이디 : " + id + " 비밀번호 : " + password);
+    			$.ajax({
+    				type:"post"
+    				, url:"/user/login"
+    				, data:{"loginId":id, "password":password}
+    				, success:function(response) {
+    					if(response.result == "success") {
+    						location.href = "/post/timeline-view";
+    					} else {
+    						alert("아이디 패스워드를 확인하세요");
+    					}
+    				}
+    				, error:function() {
+    					alert("로그인 에러");
+    				}
+    			});
+    			
+    		});
+    		
+    	});
+    
+    </script>
+    
+    
+</html>
