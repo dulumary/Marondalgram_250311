@@ -53,7 +53,21 @@
 			AND `password` = #{password}
 	</select>
 	
+	<select id="selectUserById" parameterType="int"
+	resultType="com.marondal.marondalgram.user.domain.User">
+		SELECT 
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`user`
+		WHERE 
+			`id` = #{id}
 	
-	
+	</select>
 
 </mapper>
