@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.marondal.marondalgram.common.FileManager;
+import com.marondal.marondalgram.like.service.LikeService;
 import com.marondal.marondalgram.post.domain.Post;
 import com.marondal.marondalgram.post.dto.CardView;
 import com.marondal.marondalgram.post.repository.PostRepository;
@@ -19,13 +20,16 @@ import jakarta.persistence.PersistenceException;
 @Service
 public class PostService {
 	
-	private PostRepository postRepository;
+	private final PostRepository postRepository;
 	
-	private UserService userService;
+	private final UserService userService;
 	
-	public PostService(PostRepository postRepository, UserService userService) {
+	private final LikeService likeService;
+	
+	public PostService(PostRepository postRepository, UserService userService, LikeService likeService) {
 		this.postRepository = postRepository;
 		this.userService = userService;
+		this.likeService = likeService;
 	}
 	
 	public boolean addPost(int userId, String contents, MultipartFile imageFile) {
@@ -56,12 +60,15 @@ public class PostService {
 			
 			User user = userService.getUserById(post.getUserId());
 			
+			int likeCount = likeService.getLikeCount(post.getId());
+			
 			CardView cardView = CardView.builder()
 			.postId(post.getId())
 			.contents(post.getContents())
 			.imagePath(post.getImagePath())
 			.userId(post.getUserId())
 			.loginId(user.getLoginId())
+			.likeCount(likeCount)
 			.build();
 			
 			cardList.add(cardView);

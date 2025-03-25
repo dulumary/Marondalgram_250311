@@ -30,7 +30,8 @@
 						<img class="w-100" th:src="${card.imagePath}" src="https://cdn.pixabay.com/photo/2025/03/06/08/25/blueberries-9450130_1280.jpg">
 					</div>
 					<div class="p-2">
-						<i class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i> <span>좋아요 11개</span> 
+						<i class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i> 
+						<span>좋아요 <span th:text="${card.likeCount}">11</span>개</span> 
 					</div>
 					
 					<div class="p-2">
