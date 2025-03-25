@@ -48,8 +48,8 @@
 							</div>
 						</div>
 						<div class="d-flex justify-content-between">
-							<input type="text" class="form-control col-10">
-							<button type="button" class="btn btn-info col-2 comment-btn">게시</button>
+							<input type="text" class="form-control col-10" th:id="|commentInput${card.postId}|">
+							<button type="button" class="btn btn-info col-2 comment-btn" th:data-post-id="${card.postId}">게시</button>
 						</div>
 					</div>
 					
@@ -78,6 +78,32 @@
 	
 	<script layout:fragment="script">
 		$(function() {
+			
+			$(".comment-btn").on("click", function() {
+				let postId = $(this).data("post-id");
+				
+				// 이벤트가 발생한 버튼에 매칭된 input 태그 객체 
+				// let contents = $(this).prev().val();
+				let contents = $("#commentInput" + postId).val();
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/comment/create"
+					, data:{"postId":postId, "contents":contents}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.reload();
+						} else {
+							alert("댓글 쓰기 실패!");
+						}
+						
+					}
+					, error:function() {
+						alert("댓글 쓰기 에러!");
+					}
+				});
+				
+			});
 			
 			$(".like-btn").on("click", function() {
 				
