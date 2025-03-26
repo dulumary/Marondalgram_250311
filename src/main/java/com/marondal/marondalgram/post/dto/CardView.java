@@ -1,5 +1,9 @@
 package com.marondal.marondalgram.post.dto;
 
+import java.util.List;
+
+import com.marondal.marondalgram.post.comment.dto.CommentView;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -22,8 +26,7 @@ public class CardView {
 	
 	// 로그인한 사용자의 좋아요 여부 
 	private boolean isLike;
-	// 댓글 목록
-	private List<Comment> commentList;
-	
+
+	private List<CommentView> commentList;
 
 }
