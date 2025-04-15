@@ -24,14 +24,15 @@
 				<div class="card my-3" th:each="card:${cardList}">
 					<div class="d-flex justify-content-between p-2">
 						<div th:text="${card.loginId}">dulumary</div>
-						<i class="bi bi-three-dots-vertical"></i>
+						<i th:if="${card.userId == session.userId}" class="bi bi-three-dots-vertical more-btn" th:data-post-id="${card.postId}" data-toggle="modal" data-target="#moreModal"></i>
+						
 					</div>
 					<div>
 						<img class="w-100" th:src="${card.imagePath}" src="https://cdn.pixabay.com/photo/2025/03/06/08/25/blueberries-9450130_1280.jpg">
 					</div>
 					<div class="p-2">
 						<i th:unless="${card.isLike}" class="bi bi-heart text-danger like-btn" th:data-post-id="${card.postId}"></i> 
-						<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger"></i>
+						<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger unlike-btn" th:data-post-id="${card.postId}"></i>
 						<span>좋아요 <span th:text="${card.likeCount}">11</span>개</span> 
 					</div>
 					
@@ -60,24 +61,57 @@
 			</div>
 			<!-- /타임라인 -->
 			
+			
 		</div>
 		<!-- /전체 layout -->
 
+		
 		<!-- Modal -->
-		<div class="modal fade" id="moreModal">
-		  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
+		      
 		      <div class="modal-body text-center">
-		        <a href="#" id="deleteBtn">삭제하기</a>
+		      	<a href="#" id="deleteBtn">삭제 하기</a>
 		      </div>
+		    
 		    </div>
 		  </div>
 		</div>
-	
 	</section>
 	
 	<script layout:fragment="script">
 		$(function() {
+			
+			$(".more-btn").on("click", function() {
+				// deleteBtn의 data-post-id 값을
+				// 해당 이벤트가 발생한 아이콘의 게시글 postId가 저장되도록 한다. 
+				let postId = $(this).data("post-id");
+				
+				$("#deleteBtn").data("post-id", postId);
+				
+			});
+			
+			$("#deleteBtn").on("click", function() {
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"delete"
+					, url:"/post/delete"
+					, data:{"id":postId}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패!");
+						}
+					}
+					, error:function() {
+						alert("삭제 에러!");
+					}
+				});
+			});
+			
 			
 			$(".comment-btn").on("click", function() {
 				let postId = $(this).data("post-id");
@@ -103,6 +137,26 @@
 					}
 				});
 				
+			});
+			
+			$(".unlike-btn").on("click", function() {
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"delete"
+					, url:"/post/unlike"
+					, data:{"postId":postId}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 취소 실패!");
+						}
+					}
+					, error:function() {
+						alert("좋아요 취소 에러");
+					}
+				});
 			});
 			
 			$(".like-btn").on("click", function() {

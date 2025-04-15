@@ -58,5 +58,26 @@ public class FileManager {
 		
 		return "/images" + directoryName + "/" + file.getOriginalFilename();
 	}
+	
+	// 파일 삭제 기능
+	public static boolean removeFile(String imagePath) {  // /images/6_1742553879532/goose-9453257_640.jpg
+		
+		if(imagePath == null) {
+			return false;
+		}
+		 String fullFilePath = FILE_UPLOAD_PATH + imagePath.replace("/images", "");
+		 
+		 Path path = Paths.get(fullFilePath);
+		// E:\\dulumaryT\\web\\20241114\\project\\upload\\memo/6_1742553879532
+		 Path directoryPath = path.getParent();
+		 try {
+			Files.delete(path);
+			Files.delete(directoryPath);
+		} catch (IOException e) {
+			return false;
+		}
+		
+		 return true;
+	}
 
 }
