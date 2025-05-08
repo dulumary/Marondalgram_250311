@@ -9,8 +9,7 @@ import java.nio.file.Paths;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileManager {
-	
-	
+
 	
 	public static final String FILE_UPLOAD_PATH = "E:\\dulumaryT\\web\\20241114\\project\\upload\\marondalgram"; 
 	
