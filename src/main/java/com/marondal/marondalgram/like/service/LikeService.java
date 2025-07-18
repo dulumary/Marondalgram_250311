@@ -2,9 +2,10 @@ package com.marondal.marondalgram.like.service;
 
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.marondal.marondalgram.common.FileManager;
 import com.marondal.marondalgram.like.domain.Like;
 import com.marondal.marondalgram.like.repository.LikeRepository;
 
@@ -19,6 +20,7 @@ public class LikeService {
 		this.likeRepository = likeRepository;
 	}
 	
+	@CacheEvict(value = "postLikeCount", key = "#postId")
 	public boolean addLike(int postId, int userId) {
 		
 		Like like = Like.builder()
@@ -36,6 +38,7 @@ public class LikeService {
 		
 	}
 	
+	@CacheEvict(value = "postLikeCount", key = "#postId")
 	public boolean deleteLike(int postId, int userId) {
 		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
 		
@@ -56,6 +59,7 @@ public class LikeService {
 		return true;
 	}
 	
+	@Cacheable(value = "postLikeCount", key = "#postId")
 	public int getLikeCount(int postId) {
 		return likeRepository.countByPostId(postId);
 	}

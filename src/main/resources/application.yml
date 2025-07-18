@@ -1,11 +1,15 @@
 spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
   config:
     import: security-variable.yml
   application:
     name: Marondalgram
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/marondalgram_250311
+    url: jdbc:mysql://localhost:3306/marondalgram_250618
     username: root
     password: ${mysql.password}
   thymeleaf:

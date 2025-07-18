@@ -3,6 +3,7 @@ package com.marondal.marondalgram.post.comment.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.marondal.marondalgram.post.comment.domain.Comment;
@@ -40,7 +41,7 @@ public class CommentService {
 		return true;
 	}
 	
-	
+	@Cacheable(value = "commentList", key = "#postId")
 	public List<CommentView> getCommentList(int postId) {
 		
 		List<Comment> commentList = commentRepository.findByPostId(postId);
