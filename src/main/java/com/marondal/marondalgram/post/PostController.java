@@ -22,7 +22,7 @@ public class PostController {
 		this.postService = postService;
 	}
 	
-	@GetMapping("/timeline-view")
+	@GetMapping("/timeline")
 	public String timeline(
 			HttpSession session
 			,Model model) {

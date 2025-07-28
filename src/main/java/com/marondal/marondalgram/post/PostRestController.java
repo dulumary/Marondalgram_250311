@@ -25,8 +25,8 @@ public class PostRestController {
 	}
 	
 
-	@PostMapping("/create")
-	public Map<String, String> createPost(
+	@PostMapping("/write-process")
+	public Map<String, String> writePost(
 			@RequestParam String contents
 			, @RequestParam MultipartFile imageFile
 			, HttpSession session) {
@@ -35,7 +35,7 @@ public class PostRestController {
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
-		if(postService.addPost(userId, contents, imageFile)) {
+		if(postService.createPost(userId, contents, imageFile)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");

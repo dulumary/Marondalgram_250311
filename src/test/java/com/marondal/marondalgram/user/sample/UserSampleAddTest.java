@@ -23,7 +23,7 @@ class UserSampleAddTest {
 		Faker fackerKo = new Faker(new Locale("ko"));
 		
 		for(int i = 0; i < 10000; i++) {
-			userService.addUser(
+			userService.createUser(
 					facker.internet().username()
 					, facker.internet().password()
 					, fackerKo.name().fullName()

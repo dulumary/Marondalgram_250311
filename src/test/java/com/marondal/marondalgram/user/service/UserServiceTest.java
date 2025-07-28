@@ -29,7 +29,7 @@ class UserServiceTest {
 		String email = "lecture@hagulu.com";
 	
 		// when : 기능 수행
-		boolean result = userService.addUser(loginId, password, name, email);
+		boolean result = userService.createUser(loginId, password, name, email);
 		
 		// then : 수행결과 검증
 		// 성공적으로 수행되었다면, true가 리턴되어야 해

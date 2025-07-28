@@ -10,13 +10,13 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UserController {
 	
-	@GetMapping("/login-view")
-	public String inputLogin() {
+	@GetMapping("/login")
+	public String loginForm() {
 		return "user/login";
 	}
 	
-	@GetMapping("/join-view")
-	public String inputJoin() {
+	@GetMapping("/join")
+	public String joinForm() {
 		return "user/join";
 	}
 	
@@ -27,7 +27,6 @@ public class UserController {
 		session.removeAttribute("userLoginId");
 		
 		return "redirect:/user/login-view";
-		
 	}
 
 }

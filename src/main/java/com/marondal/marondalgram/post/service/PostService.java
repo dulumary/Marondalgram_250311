@@ -30,7 +30,7 @@ public class PostService {
 	private final LikeService likeService;
 	private final CommentService commentService;
 	
-	public boolean addPost(int userId, String contents, MultipartFile imageFile) {
+	public boolean createPost(int userId, String contents, MultipartFile imageFile) {
 		
 		String imagePath = FileManager.saveFile(userId, imageFile);
 		

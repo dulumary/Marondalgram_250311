@@ -29,7 +29,7 @@ public class LikeRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, String> resultMap = new HashMap<>();
-		if(likeService.addLike(postId, userId)) {
+		if(likeService.createLike(postId, userId)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");

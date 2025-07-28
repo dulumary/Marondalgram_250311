@@ -20,15 +20,15 @@ public class CommentRestController {
 		this.commentService = commentService;
 	}
 	
-	@PostMapping("/post/comment/create")
-	public Map<String, String> createComment(
+	@PostMapping("/post/comment/write-process")
+	public Map<String, String> writeComment(
 			@RequestParam int postId
 			, @RequestParam String contents
 			, HttpSession session) {
 		int userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, String> resultMap = new HashMap<>();
-		if(commentService.addComment(postId, userId, contents)) {
+		if(commentService.createComment(postId, userId, contents)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");

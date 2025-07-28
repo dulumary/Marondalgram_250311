@@ -22,7 +22,7 @@ public class CommentService {
 	private final CommentRepository commentRepository;
 	private final UserService userService;
 	
-	public boolean addComment(int postId, int userId, String contents) {
+	public boolean createComment(int postId, int userId, String contents) {
 		
 		
 		Comment comment = Comment.builder()
@@ -41,7 +41,7 @@ public class CommentService {
 		return true;
 	}
 	
-	@Cacheable(value = "commentList", key = "#postId")
+//	@Cacheable(value = "commentList", key = "#postId")
 	public List<CommentView> getCommentList(int postId) {
 		
 		List<Comment> commentList = commentRepository.findByPostId(postId);

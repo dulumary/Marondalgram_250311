@@ -20,8 +20,8 @@ public class LikeService {
 		this.likeRepository = likeRepository;
 	}
 	
-	@CacheEvict(value = "postLikeCount", key = "#postId")
-	public boolean addLike(int postId, int userId) {
+//	@CacheEvict(value = "postLikeCount", key = "#postId")
+	public boolean createLike(int postId, int userId) {
 		
 		Like like = Like.builder()
 		.postId(postId)
@@ -38,7 +38,7 @@ public class LikeService {
 		
 	}
 	
-	@CacheEvict(value = "postLikeCount", key = "#postId")
+//	@CacheEvict(value = "postLikeCount", key = "#postId")
 	public boolean deleteLike(int postId, int userId) {
 		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
 		
@@ -59,7 +59,7 @@ public class LikeService {
 		return true;
 	}
 	
-	@Cacheable(value = "postLikeCount", key = "#postId")
+//	@Cacheable(value = "postLikeCount", key = "#postId")
 	public int getLikeCount(int postId) {
 		return likeRepository.countByPostId(postId);
 	}

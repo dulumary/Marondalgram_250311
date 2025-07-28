@@ -25,7 +25,7 @@ public class UserRestController {
 		this.userService = userService;
 	}
 	
-	@PostMapping("/join")
+	@PostMapping("/join-process")
 	public Map<String, String> join(
 			@RequestParam String loginId
 			, @RequestParam String password
@@ -34,7 +34,7 @@ public class UserRestController {
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
-		if(userService.addUser(loginId, password, name, email)) {
+		if(userService.createUser(loginId, password, name, email)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");
@@ -60,7 +60,7 @@ public class UserRestController {
 	}
 	
 	
-	@PostMapping("/login")
+	@PostMapping("/login-process")
 	public Map<String, String> login(
 			@RequestParam String loginId
 			, @RequestParam String password
