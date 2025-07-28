@@ -3,11 +3,13 @@ package com.marondal.marondalgram.like.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.marondal.marondalgram.like.domain.Like;
 
 import jakarta.transaction.Transactional;
 
+@Repository
 public interface LikeRepository extends JpaRepository<Like, Integer> {
 	
 	// SELECT count(*) FROM `like` WHERE `postId` = #{}

@@ -3,7 +3,7 @@ package com.marondal.marondalgram.post.comment.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.marondal.marondalgram.post.comment.domain.Comment;
@@ -12,7 +12,6 @@ import com.marondal.marondalgram.post.comment.repository.CommentRepository;
 import com.marondal.marondalgram.user.domain.User;
 import com.marondal.marondalgram.user.service.UserService;
 
-import jakarta.persistence.PersistenceException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -34,7 +33,7 @@ public class CommentService {
 		try {
 			commentRepository.save(comment);
 			
-		} catch(PersistenceException e) {
+		} catch(DataAccessException e) {
 			return false;
 		}
 		

@@ -2,14 +2,11 @@ package com.marondal.marondalgram.like.service;
 
 import java.util.Optional;
 
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.marondal.marondalgram.like.domain.Like;
 import com.marondal.marondalgram.like.repository.LikeRepository;
-
-import jakarta.persistence.PersistenceException;
 
 @Service
 public class LikeService {
@@ -30,7 +27,7 @@ public class LikeService {
 		
 		try {			
 			likeRepository.save(like);
-		} catch(PersistenceException e) {
+		} catch(DataAccessException e) {
 			return false;
 		}
 		
@@ -48,7 +45,7 @@ public class LikeService {
 			
 			try {				
 				likeRepository.delete(like);
-			} catch(PersistenceException e) {
+			} catch(DataAccessException e) {
 				return false;
 			}
 			

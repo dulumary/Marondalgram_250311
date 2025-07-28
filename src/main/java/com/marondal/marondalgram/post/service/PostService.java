@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,6 @@ import com.marondal.marondalgram.post.repository.PostRepository;
 import com.marondal.marondalgram.user.domain.User;
 import com.marondal.marondalgram.user.service.UserService;
 
-import jakarta.persistence.PersistenceException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -42,7 +42,7 @@ public class PostService {
 		
 		try {			
 			postRepository.save(post);
-		} catch(PersistenceException e) {
+		} catch(DataAccessException e) {
 			return false;
 		}
 		
@@ -102,7 +102,7 @@ public class PostService {
 			
 			try {
 				postRepository.delete(post);				
-			} catch(PersistenceException e) {
+			} catch(DataAccessException e) {
 				return false;
 			}
 			
