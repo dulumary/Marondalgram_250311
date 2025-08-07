@@ -7,15 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.marondal.marondalgram.like.domain.Like;
 import com.marondal.marondalgram.like.repository.LikeRepository;
+import com.marondal.marondalgram.notification.event.producer.NotificationProducer;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class LikeService {
 	
 	private final LikeRepository likeRepository;
+	private final NotificationProducer notificationProducer;
 	
-	public LikeService(LikeRepository likeRepository) {
-		this.likeRepository = likeRepository;
-	}
 	
 //	@CacheEvict(value = "postLikeCount", key = "#postId")
 	public boolean createLike(int postId, int userId) {
@@ -27,6 +29,8 @@ public class LikeService {
 		
 		try {			
 			likeRepository.save(like);
+			
+			notificationProducer.sendLikeToPostNotification(userId, postId);
 		} catch(DataAccessException e) {
 			return false;
 		}

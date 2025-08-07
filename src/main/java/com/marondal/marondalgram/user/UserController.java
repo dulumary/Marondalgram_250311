@@ -26,7 +26,7 @@ public class UserController {
 		session.removeAttribute("userId");
 		session.removeAttribute("userLoginId");
 		
-		return "redirect:/user/login-view";
+		return "redirect:/user/login";
 	}
 
 }

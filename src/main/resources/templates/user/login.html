@@ -24,7 +24,7 @@
                 
             </div>
             <div class="mt-4 p-3 d-flex justify-content-center align-items-start bg-white  border rounded">
-                계정이 없으신가요? <a href="/user/join-view">가입하기</a>
+                계정이 없으신가요? <a href="/user/join">가입하기</a>
             </div>
         </div>
     </section>
@@ -52,11 +52,11 @@
     			console.log("아이디 : " + id + " 비밀번호 : " + password);
     			$.ajax({
     				type:"post"
-    				, url:"/user/login"
+    				, url:"/user/login-process"
     				, data:{"loginId":id, "password":password}
     				, success:function(response) {
     					if(response.result == "success") {
-    						location.href = "/post/timeline-view";
+    						location.href = "/post/timeline";
     					} else {
     						alert("아이디 패스워드를 확인하세요");
     					}

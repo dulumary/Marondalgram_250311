@@ -3,7 +3,9 @@
 		        <h2 class="ml-3">Marondalgram</h2>
 		        
 		        <div class="mr-3" th:if="${session.userId != null}">
-		        	<i class="bi bi-chat-fill text-danger"></i> <span th:text="${session.userLoginId}">marodal</span> <a href="/user/logout">로그아웃</a>
+		        	<a href="/notification/list"><i class="bi bi-chat-fill text-danger"></i></a> 
+		        	<span th:text="${session.userLoginId}">marodal</span>
+		        	<a href="/user/logout">로그아웃</a>
 		        </div>
             </div>
 	        <hr>    

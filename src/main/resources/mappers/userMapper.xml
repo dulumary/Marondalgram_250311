@@ -10,7 +10,7 @@
 		INSERT INTO 
 			`user`
 		(
-			`loginId`
+			`login_id`
 			, `password`
 			, `name`
 			, `email`
@@ -28,11 +28,11 @@
 	
 	<select id="selectCountByLoginId" parameterType="string" resultType="int">
 		SELECT 
-			count(*)
+			COUNT(*)
 		FROM 
 			`user`
 		WHERE 
-			`loginId` = #{loginId}
+			`login_id` = #{loginId}
 	
 	</select>
 	
@@ -40,16 +40,16 @@
 	resultType="com.marondal.marondalgram.user.domain.User">
 		SELECT 
 			`id`
-			, `loginId`
+			, `login_id`
 			, `password`
 			, `name`
 			, `email`
-			, `createdAt`
-			, `updatedAt`
+			, `created_at`
+			, `updated_at`
 		FROM 
 			`user`
 		WHERE 
-			`loginId` = #{loginId}
+			`login_id` = #{loginId}
 			AND `password` = #{password}
 	</select>
 	
@@ -57,12 +57,12 @@
 	resultType="com.marondal.marondalgram.user.domain.User">
 		SELECT 
 			`id`
-			, `loginId`
+			, `login_id`
 			, `password`
 			, `name`
 			, `email`
-			, `createdAt`
-			, `updatedAt`
+			, `created_at`
+			, `updated_at`
 		FROM 
 			`user`
 		WHERE 

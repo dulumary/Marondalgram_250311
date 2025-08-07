@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}">
+    
+    <section layout:fragment="contents" class="contents">
+   		<h3>알림 내역</h3>
+   		<table class="table text-center">
+   			<thead>
+   				<tr>
+   					<th>내용</th>
+   					<th>읽음</th>
+   					
+   					<th>날짜</th>
+   				</tr>
+   			</thead> 
+   			<tbody>
+   				<tr th:each="notification:${notiList}">
+   					<td th:text="${notification.message}">hagulu님이 글에 댓글을 달았습니다.</td>
+   					<td>읽음</td>
+   					<td th:text="${#temporals.format(notification.createdAt, 'yyyy-MM-dd HH:mm:ss')}">2025-07-28 15:11:12</td>
+   				</tr>
+   				
+   			
+   			</tbody>
+   		</table>
+
+    </section>
+    
+
+</html>

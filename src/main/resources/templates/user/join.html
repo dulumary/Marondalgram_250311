@@ -31,7 +31,7 @@
 	                
 	            </div>
 	            <div class="mt-4 p-3 d-flex justify-content-center align-items-start bg-white  border rounded">
-	                계정이 있으신가요? <a href="/user/login-view">로그인</a>
+	                계정이 있으신가요? <a href="/user/login">로그인</a>
 	            </div>
 	        </div>
 	    </section>
@@ -134,11 +134,11 @@
         			
         			$.ajax({
         				type:"post"
-        				, url:"/user/join"
+        				, url:"/user/join-process"
         				, data:{"loginId":id, "password":password, "name":name, "email":email}
         				, success:function(response) {
         					if(response.result == "success") {
-        						location.href = "/user/login-view";
+        						location.href = "/user/login";
         					} else {
         						alert("회원가입 실패!");
         					}

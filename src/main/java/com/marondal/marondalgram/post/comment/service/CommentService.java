@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.marondal.marondalgram.notification.event.producer.NotificationProducer;
 import com.marondal.marondalgram.post.comment.domain.Comment;
 import com.marondal.marondalgram.post.comment.dto.CommentView;
 import com.marondal.marondalgram.post.comment.repository.CommentRepository;
@@ -20,8 +21,10 @@ public class CommentService {
 	
 	private final CommentRepository commentRepository;
 	private final UserService userService;
+	private final NotificationProducer notificationProducer;
 	
 	public boolean createComment(int postId, int userId, String contents) {
+		
 		
 		
 		Comment comment = Comment.builder()
@@ -33,6 +36,8 @@ public class CommentService {
 		try {
 			commentRepository.save(comment);
 			
+			
+			notificationProducer.sendCommentToPostNotification(userId, postId);
 		} catch(DataAccessException e) {
 			return false;
 		}

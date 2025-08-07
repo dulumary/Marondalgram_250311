@@ -122,7 +122,7 @@
 				
 				$.ajax({
 					type:"post"
-					, url:"/post/comment/create"
+					, url:"/post/comment/write-process"
 					, data:{"postId":postId, "contents":contents}
 					, success:function(response) {
 						if(response.result == "success") {
@@ -204,7 +204,7 @@
 				
 				$.ajax({
 					type:"post"
-					, url:"/post/create"
+					, url:"/post/write-process"
 					, data:formData
 					, enctype:"multipart/form-data"
 					, processData:false
